@@ -1,0 +1,28 @@
+library(readr)
+install.packages("dplyr")
+library(dplyr)
+twitter <- read_csv("Downloads/training.1600000.processed.noemoticon.csv", 
+                                                  col_names = FALSE)
+View(twitter)
+
+negative <- filter(twitter, X1 == 0)
+nrow(negative)
+negative_tweets <- negative[1:5000,]
+negative_tweets
+
+positive <- filter(twitter, X1 == 4)
+positive_tweets <- positive[1:5000,]
+positive_tweets
+
+ntweets <- negative_tweets$X6
+ntweets
+NT2 <- gsub('http\\S+\\s*',"", ntweets)
+NT <- gsub('@\\w+',"", NT2)
+NT
+
+ptweets <- positive_tweets$X6
+ptweets
+
+PT2 <- gsub('http\\S+\\s*',"", ptweets)
+PT <- gsub('@\\w+',"", PT2)
+PT
